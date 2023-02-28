@@ -1,5 +1,5 @@
 //importar model corresponde ao controller
-const {Users} = require('../models')
+const {User} = require('../models')
 
 const controller = {} //obj vazio
 
@@ -17,6 +17,20 @@ controller.create = async(req,res) => {
         await User.create(req.body)
         //http 201: created
         res.status(201).end()
+    }
+    catch(error){
+        console.error(error)
+    }
+}
+
+controller.retrieveOne = async (req,res)=>{
+    try{
+        const data = await User.findByPk()
+        //HTTP 200: OK(implicito)
+        if(data) res.send(data)
+
+        //HTTP 404: Not found 
+        else res.status(404).end()
     }
     catch(error){
         console.error(error)

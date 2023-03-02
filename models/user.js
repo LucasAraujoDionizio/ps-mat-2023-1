@@ -14,38 +14,38 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   User.init({
-    id:{ 
-      type:DataTypes.INTEGER,
+    id:{
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    name:{ 
+    name:{
       type: DataTypes.STRING(100),
       allowNull: false
     },
-    email:{ 
-      type:DataTypes.STRING(100),
+    email:{
+      type: DataTypes.STRING(100),
       allowNull: false
     },
-    verified_email: { 
+    verified_email:{
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      default:false
+      default: false // Valor padrão do campo
     },
-    is_admin: {
+    is_admin:{
       type: DataTypes.BOOLEAN,
       allowNull: false,
       default: false
     },
-    phone: {
+    phone:{
       type: DataTypes.STRING(20),
-      allowNull: false,
+      allowNull: false
     },
     password:{
-      type:DataTypes.STRING(200),
-      allowNull:false
-    } 
+      type: DataTypes.STRING(200),
+    allowNull: false
+    }
   }, {
     sequelize,
     modelName: 'User',

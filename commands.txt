@@ -1,0 +1,3 @@
+npx sequelize-cli model:generate --name Chanel --attributes id:integer,name:string,email:string,verified_email:boolean,is_admin:boolean,phone:string,password:string
+
+npx sequelize-cli model:generate --name Channel --attributes id:integer,description:string,comission_fee:decimal

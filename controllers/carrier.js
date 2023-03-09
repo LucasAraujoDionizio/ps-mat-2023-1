@@ -1,5 +1,5 @@
 //Importar o model correspodente ao controller
-const { Channel } = require('../models')
+const { Carrier } = require('../models')
 
 const controller = {} //Objeto Vazio
 
@@ -14,7 +14,7 @@ const controller = {} //Objeto Vazio
 
 controller.create = async (req, res) => {
     try{
-        await Channel.create(req.body)
+        await Carrier.create(req.body)
         // HTTP 201: Created
         res.status(201).end()
     }
@@ -25,7 +25,7 @@ controller.create = async (req, res) => {
 
 controller.retrive = async (req, res) => {
     try{
-        const data = await Channel.findAll()
+        const data = await Carrier.findAll()
         // HTTP 200: OK (implicito)
         res.send(data)
     }
@@ -36,7 +36,7 @@ controller.retrive = async (req, res) => {
 
 controller.retriveOne = async (req, res) => {
     try{
-        const data = await Channel.findByPk(req.params.id)
+        const data = await Carrier.findByPk(req.params.id)
 
         // HTTP 200: OK (implicito)
         if(data) res.send(data)
@@ -50,7 +50,7 @@ controller.retriveOne = async (req, res) => {
 }
 controller.update = async (req, res) => {
     try{
-       const response = await Channel.update(
+       const response = await Carrier.update(
         req.body,
             { where: { id: req.params.id }}
        )
@@ -71,7 +71,7 @@ controller.update = async (req, res) => {
 }
 controller.delete = async (req,res)=>{
     try{
-        const response = await Channel.destroy(
+        const response = await Carrier.destroy(
             {where:{id:req.params.id}}
         )
         if(response){

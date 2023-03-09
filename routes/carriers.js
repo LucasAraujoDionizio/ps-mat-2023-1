@@ -1,7 +1,7 @@
+
 const express = require('express');
-const {retrive} = require('../controllers/user')
 const router = express.Router();
-const controller = require('../controllers/user')
+const controller = require('../controllers/carrier')
 
 router.post('/', controller.create)
 router.get('/', controller.retrive)

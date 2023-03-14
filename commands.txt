@@ -9,3 +9,4 @@ npx sequelize-cli model:generate --name PaymentMethod --attributes description:s
 
 migra
  npx sequelize-cli db:migrate
+

@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class PaymentMethod extends Model {
+  class ShipmentPriority extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  PaymentMethod.init({
+  ShipmentPriority.init({
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -24,14 +24,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.STRING(30)
     },
-    operator_fee: {
-      allowNull: false,
-      type: DataTypes.DECIMAL(18, 2)
-    },
   }, {
     sequelize,
-    modelName: 'PaymentMethod',
-    tableName: 'payment_methods'
+    modelName: 'ShipmentPriority',
+    tableName: 'shipment_priorities'
   });
-  return PaymentMethod;
+  return ShipmentPriority;
 };

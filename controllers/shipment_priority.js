@@ -1,5 +1,5 @@
 //Importar o model correspodente ao controller
-const { PaymentMethod } = require('../models')
+const { ShipmentPriority } = require('../models')
 
 const controller = {} //Objeto Vazio
 
@@ -14,7 +14,7 @@ const controller = {} //Objeto Vazio
 
 controller.create = async (req, res) => {
     try{
-        await PaymentMethod.create(req.body)
+        await ShipmentPriority.create(req.body)
         // HTTP 201: Created
         res.status(201).end()
     }
@@ -25,7 +25,7 @@ controller.create = async (req, res) => {
 
 controller.retrive = async (req, res) => {
     try{
-        const data = await PaymentMethod.findAll()
+        const data = await ShipmentPriority.findAll()
         // HTTP 200: OK (implicito)
         res.send(data)
     }
@@ -36,7 +36,7 @@ controller.retrive = async (req, res) => {
 
 controller.retriveOne = async (req, res) => {
     try{
-        const data = await PaymentMethod.findByPk(req.params.id)
+        const data = await ShipmentPriority.findByPk(req.params.id)
 
         // HTTP 200: OK (implicito)
         if(data) res.send(data)
@@ -50,7 +50,7 @@ controller.retriveOne = async (req, res) => {
 }
 controller.update = async (req, res) => {
     try{
-       const response = await PaymentMethod.update(
+       const response = await ShipmentPriority.update(
         req.body,
             { where: { id: req.params.id }}
        )
@@ -71,7 +71,7 @@ controller.update = async (req, res) => {
 }
 controller.delete = async (req,res)=>{
     try{
-        const response = await PaymentMethod.destroy(
+        const response = await ShipmentPriority.destroy(
             {where:{id:req.params.id}}
         )
         if(response){

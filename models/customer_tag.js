@@ -20,22 +20,11 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    name: {
+    customer_id: {
       allowNull: false,
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER
     },
-    address: {
-      type: DataTypes.STRING
-    },
-    phone: {
-      allowNull: false,
-      type: DataTypes.STRING
-    },
-    is_whatsapp: {
-      allowNull: false,
-      type: DataTypes.BOOLEAN
-    },
-    city_id: {
+    tag_id: {
       allowNull: false,
       type: DataTypes.INTEGER
     },

@@ -11,14 +11,14 @@ module.exports = {
       },
       name: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING(100)
       },
       address: {
         type: Sequelize.STRING
       },
       phone: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.STRING(20)
       },
       is_whatsapp: {
         allowNull: false,

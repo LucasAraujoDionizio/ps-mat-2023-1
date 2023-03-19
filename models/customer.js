@@ -14,11 +14,31 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Customer.init({
-    name: DataTypes.STRING,
-    address: DataTypes.STRING,
-    phone: DataTypes.STRING,
-    is_whatsapp: DataTypes.BOOLEAN,
-    city_id: DataTypes.INTEGER
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER
+    },
+    name: {
+      allowNull: false,
+      type: DataTypes.STRING(100)
+    },
+    address: {
+      type: DataTypes.STRING
+    },
+    phone: {
+      allowNull: false,
+      type: DataTypes.STRING(20)
+    },
+    is_whatsapp: {
+      allowNull: false,
+      type: DataTypes.BOOLEAN
+    },
+    city_id: {
+      allowNull: false,
+      type: DataTypes.INTEGER
+    },
   }, {
     sequelize,
     modelName: 'Customer',

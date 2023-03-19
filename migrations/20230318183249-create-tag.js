@@ -2,20 +2,23 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('order_tags', {
+    await queryInterface.createTable('tags', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      order_id: {
+      description: {
         allowNull:false,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING(30)
       },
-      tag_id: {
+      color: {
+        type: Sequelize.STRING(8)
+      },
+      type: {
         allowNull:false,
-        type: Sequelize.INTEGER
+        type: Sequelize.ENUM('C','O')
       },
       createdAt: {
         allowNull: false,
@@ -28,6 +31,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('order_tags');
+    await queryInterface.dropTable('tags');
   }
 };

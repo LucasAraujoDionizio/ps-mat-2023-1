@@ -8,7 +8,7 @@ npx sequelize-cli model:generate --name Channel --attributes id:integer,descript
 npx sequelize-cli model:generate --name PaymentMethod --attributes description:string,operator_fee:decimal
 
 migra
- npx sequelize-cli db:migrate/undo
-
+ npx sequelize-cli db:migrate
+npx sequelize-cli db:migrate:undo
 
 npx sequelize-cli migration:generate --name alter-table-users

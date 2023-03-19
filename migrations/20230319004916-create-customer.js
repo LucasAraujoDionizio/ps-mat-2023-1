@@ -2,19 +2,30 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('order_tags', {
+    await queryInterface.createTable('customers', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      order_id: {
-        allowNull:false,
-        type: Sequelize.INTEGER
+      name: {
+        allowNull: false,
+        type: Sequelize.STRING
       },
-      tag_id: {
-        allowNull:false,
+      address: {
+        type: Sequelize.STRING
+      },
+      phone: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      is_whatsapp: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN
+      },
+      city_id: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       createdAt: {
@@ -28,6 +39,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('order_tags');
+    await queryInterface.dropTable('customers');
   }
 };

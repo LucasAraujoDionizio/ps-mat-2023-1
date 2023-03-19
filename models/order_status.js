@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class order_tag extends Model {
+  class OrderStatus extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,25 +13,25 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  order_tag.init({
+  OrderStatus.init({
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    order_id: {
+    sequence: {
       allowNull: false,
-      type: DataTypes.INTEGER
+      type: DataTypes.SMALLINT
     },
-    tag_id: {
+    description: {
       allowNull: false,
-      type: DataTypes.INTEGER
+      type: DataTypes.STRING
     },
   }, {
     sequelize,
-    modelName: 'OrderTag',
-    tableName: 'order_tags'
+    modelName: 'OrderStatus',
+    tableName: 'order_statuses'
   });
-  return order_tag;
+  return OrderStatus;
 };

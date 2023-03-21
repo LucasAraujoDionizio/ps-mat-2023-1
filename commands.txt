@@ -12,3 +12,4 @@ migra
 npx sequelize-cli db:migrate:undo
 
 npx sequelize-cli migration:generate --name alter-table-users
+npx sequelize-cli migration:generate --name alter-table-customer-tags

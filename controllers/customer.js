@@ -1,5 +1,7 @@
 //Importar o model correspodente ao controller
-const {Customer} = require('../models')
+const {Customer,City,CustomerTag} = require('../models')
+const city = require('../models/city')
+const customer_tag = require('../models/customer_tag')
 
 const controller = {} //Objeto Vazio
 
@@ -25,8 +27,13 @@ controller.create = async (req, res) => {
 
 controller.retrive = async (req, res) => {
     try{
-        const data = await Customer.findAll()
-        // HTTP 200: OK (implicito)
+        const data = await Customer.findAll({
+            include:[
+                {model: City, as:'city'},
+                {model: CustomerTag, as: 'tags'}
+            ]
+        })
+       
         res.send(data)
     }
     catch(error){
@@ -37,8 +44,6 @@ controller.retrive = async (req, res) => {
 controller.retriveOne = async (req, res) => {
     try{
         const data = await Customer.findByPk(req.params.id)
-
-        // HTTP 200: OK (implicito)
         if(data) res.send(data)
 
         // HTTP 200: OK (implicito)

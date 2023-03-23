@@ -9,15 +9,18 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
-      //belongs n pra 1, has many 1 pra n
-      this.belongsTo(models.Customer,
-        {
-          foreignKey: 'customer_id', //campo da tabela estrangeira
-          sourceKey: 'id', //campo da tabela local'
-          as: 'customer'//nome do campo de associação
+      static associate(models) {
+        this.belongsTo(models.Customer, {
+          foreignKey: 'customer_id',    // Nome do campo na tabela de ORIGEM
+          targetKey: 'id',          // Nome do campo na tabela de DESTINO
+          as: 'customer'                // Nome do atributo para exibição
         })
-    }
+        this.belongsTo(models.Tag, {
+          foreignKey: 'tag_id',    // Nome do campo na tabela de ORIGEM
+          targetKey: 'id',          // Nome do campo na tabela de DESTINO
+          as: 'tag'                // Nome do atributo para exibição
+        })
+      }
   }
   CustomerTag.init({
     id: {

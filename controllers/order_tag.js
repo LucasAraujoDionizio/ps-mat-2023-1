@@ -25,7 +25,7 @@ controller.create = async (req, res) => {
 
 controller.retrive = async (req, res) => {
     try{
-        const data = await CustomerTag.findAll({
+        const data = await OrderTag.findAll({
             include:[
                 {model:Order, as: 'order'},
                 {model:Tag, as: 'tag'}

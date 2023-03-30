@@ -42,7 +42,6 @@ module.exports = {
         type: Sequelize.DATE
       },
       artwork_date: {
-        allowNull: false,
         type: Sequelize.DATE
       },
       shipment_date: {

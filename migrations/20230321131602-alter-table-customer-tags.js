@@ -33,7 +33,7 @@ module.exports = {
 
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.removeConstraint('customer_tags', 'customer_tags_customers_fk')
     await queryInterface.removeConstraint('customer_tags', 'customer_tags_tags_fk')
+    await queryInterface.removeConstraint('customer_tags', 'customer_tags_customers_fk')
   }
 };

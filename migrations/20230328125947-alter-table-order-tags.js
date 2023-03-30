@@ -32,7 +32,7 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    await queryInterface.removeConstraint('order_tags', 'order_tags_orders_fk')
     await queryInterface.removeConstraint('order_tags', 'order_tags_tags_fk')
+    await queryInterface.removeConstraint('order_tags', 'order_tags_orders_fk')
   }
 };

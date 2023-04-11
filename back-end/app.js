@@ -34,6 +34,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//chama a verificação de autenticação para qualquer rota 
+const auth = require('./lib/auth')
+app.use(auth)
 /**********************************Rotas******************************** */
 const users = require('./routes/users')
 app.use('/users', users)

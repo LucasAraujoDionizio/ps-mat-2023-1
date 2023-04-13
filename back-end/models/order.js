@@ -6,16 +6,31 @@ module.exports = (sequelize, DataTypes) => {
   class Order extends Model {
     /**
      * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
+     * This method is not a part of DataTypes lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
-      this.belongsToMany(models.Tag,{
-        through:'order_tags', //tabela intermediaria
-        foreignKey: 'order_id', //chave estrangeira  ]
-        otherKey: 'tag_id', //outra chave da tabela intermediaria
-        as: 'tags'//nome do campo de associação (plural)
+      this.belongsToMany(models.Tag, {
+        through: 'order_tags',     //Tabela intermediária
+        foreignKey: 'tag_id',         //Chave strangeira da tabela iintermediaria
+        otherKey: 'order_id',
+        as: 'tags'
+      })
+
+      this.belongsToMany(models.User, {
+        through: 'order_rel_statuses',     //Tabela intermediária
+        foreignKey: 'user_id',         //Chave strangeira da tabela iintermediaria
+        otherKey: 'order_status_id',
+        otherKey: 'order_id',
+        as: 'users'
+      })
+
+      this.belongsToMany(models.OrderStatus, {
+        through: 'order_rel_statuses',     //Tabela intermediária
+        foreignKey: 'order_status_id',         //Chave strangeira da tabela iintermediaria
+        otherKey: 'order_id',
+        otherKey: 'user_id',
+        as: 'order_statuses'
       })
     }
   }

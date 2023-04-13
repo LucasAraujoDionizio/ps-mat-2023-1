@@ -14,10 +14,11 @@ module.exports = {
       onDelete: 'RESTRICT',     //Não deixa apagar um customer em uso no customer_tags
       onUpdate: 'CASCADE'       //Atualiza tag_id em customer_tags se id em tags mudar
     })
+
     await queryInterface.addConstraint('order_rel_statuses', {
       fields: ['order_status_id'],      
       type: 'foreign key',
-      name: 'order_rel_statuses_order_statuses_fk',    
+      name: 'order_rel_statuses_order_statuses _fk',    
       references: {
         table: 'order_satuses',        //Tabela estrangeira
         field: 'id'             //Campo da tabela estrangeira
@@ -25,6 +26,7 @@ module.exports = {
       onDelete: 'RESTRICT',     //Não deixa apagar um customer em uso no customer_tags
       onUpdate: 'CASCADE'       //Atualiza tag_id em customer_tags se id em tags mudar
     })
+
     await queryInterface.addConstraint('order_rel_statuses', {
       fields: ['order_id'],      
       type: 'foreign key',
@@ -39,7 +41,6 @@ module.exports = {
 
   },
 
-  
   async down (queryInterface, Sequelize) {
     await queryInterface.removeConstraint('order_rel_statuses', 'order_rel_statuses_orders_fk')
     await queryInterface.removeConstraint('order_rel_statuses', 'order_rel_statuses_order_statuses_fk')

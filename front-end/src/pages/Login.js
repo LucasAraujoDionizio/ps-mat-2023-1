@@ -1,11 +1,11 @@
 import React from 'react'
 
-export default function Home(){
+export default function Login() {
 
-    return(
+    return (
         <>
-            <h1>Página inicial</h1>
-            <p>Esta será a pagina de Login</p>
+            <h1>Página de login</h1>
+            <p>Ista será a página de login</p>
         </>
     )
 }

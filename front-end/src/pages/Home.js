@@ -1,11 +1,12 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-export default function Home(){
-    return(
+export default function Home() {
+    return (
         <>
             <h1>Página inicial</h1>
-            <p>Ir para a<Link to="/login">Página de login</Link>.</p>
+            <p>Ir para a <Link to= "/login">página de login</Link></p>
+
         </>
     )
 }

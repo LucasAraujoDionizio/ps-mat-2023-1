@@ -1,5 +1,5 @@
 //Importar o model correspodente ao controller
-const { User } = require('../models')
+const  {User,Order,OrderStatus} = require('../models')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
@@ -28,10 +28,14 @@ controller.create = async (req, res) => {
     }
 }
 
-controller.retrive = async (req, res) => {
+controller.retrieve = async(req, res) => {
     try{
-        const data = await User.findAll()
-        // HTTP 200: OK (implicito)
+        const data = await User.findAll({
+            include: [
+                {model: OrderStatus, as: 'order_statuses'},
+                {model: Order, as: 'orders'}]
+        }) //findAll dá um select*
+        //HTTP 200: OK (implícito)
         res.send(data)
     }
     catch(error){

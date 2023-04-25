@@ -7,10 +7,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
 var app = express();
+
+//habilita que qualquer origem de front end possa acessar o backend
+const cors = require ('cors')
+app.use(cors())
 
 // Conexão ao BD ---------------------------------------------------------------------
 const db = require('./models')
@@ -77,5 +78,11 @@ app.use('/order_rel_statuses', orderRelStatuses)
 
 const orders = require ('./routes/orders')
 app.use('/orders', orders)
+
+const suppliers = require('./routes/suppliers')
+app.use('/suppliers', suppliers)
+
+const products = require('./routes/products')
+app.use('/products', products)
 
 module.exports = app;

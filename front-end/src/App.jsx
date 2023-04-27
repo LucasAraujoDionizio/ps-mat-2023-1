@@ -5,6 +5,12 @@ import Login from './pages/Login'
 import HeaderBar from './components/ui/HeaderBar'
 import Box from '@mui/material/Box'
 
+function AuthGuard({children}){
+  //estaremos autenticados se tivermos um token gravad no localStorage
+  if(window.localStorage.getItem('token')) return children
+  else
+}
+
 function App() {
 
   return (

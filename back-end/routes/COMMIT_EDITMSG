@@ -1,0 +1,15 @@
+ 
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch main
+# Your branch is up to date with 'origin/main'.
+#
+# Changes to be committed:
+#	modified:   app.js
+#	modified:   routes/users.js
+#
+# Changes not staged for commit:
+#	modified:   ../front-end/src/index.css
+#	modified:   ../front-end/src/pages/Login.jsx
+#

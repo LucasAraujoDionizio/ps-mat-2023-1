@@ -7,6 +7,7 @@ import Backdrop from '@mui/material/Backdrop'
 import CircularProgress from '@mui/material/CircularProgress'
 import Snackbar from '@mui/material/Snackbar'
 import Alert from '@mui/material/Alert'
+import myfetch from '../utils/myfetch'
 
 export default function Login() {
 
@@ -28,19 +29,7 @@ export default function Login() {
     event.preventDefault()      // Impede o recarregamento da página
     setShowWaiting(true)        // Mostra o spinner de espera
     try {
-      let response = await fetch('http://localhost:3000/users/login', {
-        method: "POST",
-        body: JSON.stringify({email, password}),
-        headers: {"Content-type": "application/json; charset=UTF-8"}
-      })
-      
-      console.log(response)
-
-      if(response.ok) {
-        const result = await response.json()
-      
-        console.log({result})
-
+      const result = myfetch.post('/users/login', {email,password})
         // Grava o token recebido no localStorage
         // ISSO É UM SÉRIO PROBLEMA DE SEGURANÇA, temos de consertar depois
         window.localStorage.setItem('token', result.token)
@@ -51,12 +40,15 @@ export default function Login() {
           message: 'Autenticação realizada com sucesso!',
           severity: 'success'
         })
-      }
-      else throw new Error('Usuário ou senha incorretos')
     }
     catch(error) {
       console.error(error)
       // Exibe o snackbar de erro
+
+      //Apaga o token de autenticação localSotrage, caso exista
+      widow.localStorage.removeItem('token')
+      
+
       setSnack({
         show: true,
         message: error.message,

@@ -4,8 +4,11 @@ const controller = require('../controllers/customer')
 const auth = require('../lib/auth')
 
 router.post('/', controller.create)
-router.get('/',auth,controller.retrive)
-router.get('/:id', controller.retriveOne)
+router.get('/', auth, controller.retrieve)
+router.get('/:id', controller.retrieveOne)
 router.put('/:id', controller.update)
-router.delete('/:id',controller.delete)
+router.delete('/:id', controller.delete)
+
+
+
 module.exports = router;

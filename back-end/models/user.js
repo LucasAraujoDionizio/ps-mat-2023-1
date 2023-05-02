@@ -10,75 +10,56 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsToMany(models.Order, {
-        through: 'order_rel_statuses',     //Tabela intermediária
-        foreignKey: 'order_id',         //Chave strangeira da tabela iintermediaria
-        otherKey: 'order_status_id',
-        otherKey: 'user_id',
-        as: 'orders'
-      })
-
-      this.belongsToMany(models.OrderStatus, {
-        through: 'order_rel_statuses',     //Tabela intermediária
-        foreignKey: 'order_status_id',         //Chave strangeira da tabela iintermediaria
-        otherKey: 'order_id',
-        otherKey:'user_id',
-        as: 'order_statuses'
-      })
+      // define association here
     }
   }
   User.init({
-    id:{
+    id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    name:{
+    name: {
       type: DataTypes.STRING(100),
       allowNull: false
     },
-    email:{
+    email: {
       type: DataTypes.STRING(100),
       allowNull: false
     },
-    verified_email:{
+    verified_email: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      default: false // Valor padrão do campo
+      default: false    // Valor padrão do campo
     },
-    is_admin:{
+    is_admin: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       default: false
     },
-    phone:{
+    phone: {
       type: DataTypes.STRING(20),
-      allowNull: false
+      allowNull: true
     },
-    password:{
+    password: {
       type: DataTypes.STRING(200),
-    allowNull: false
+      allowNull: false
     }
   }, {
     sequelize,
     modelName: 'User',
     tableName: 'users',
+    // Esconde o campo "password" no retrieve e no retrieveOne
     defaultScope: {
-      //esconde o campo password no retrieve e no retrieveone
       attributes: {
         exclude: ['password']
       }
     },
-    //inclui o campo "password" (necessário no login)
-    withPassword: {
-      attributes: {
-        include: ['password']
-      }
-    },
-    scopes:{
-      withPassword:{
-        attributes:{
+    scopes: {
+      // Inclui o campo "password" (necessário no login)
+      withPassword: {
+        attributes: {
           include: ['password']
         }
       }

@@ -29,26 +29,26 @@ export default function Login() {
     event.preventDefault()      // Impede o recarregamento da página
     setShowWaiting(true)        // Mostra o spinner de espera
     try {
-      const result = myfetch.post('/users/login', {email,password})
-        // Grava o token recebido no localStorage
-        // ISSO É UM SÉRIO PROBLEMA DE SEGURANÇA, temos de consertar depois
-        window.localStorage.setItem('token', result.token)
 
-        // Exibe o snackbar de sucesso
-        setSnack({
-          show: true,
-          message: 'Autenticação realizada com sucesso!',
-          severity: 'success'
-        })
+      const result = await myfetch.post('/users/login', { email, password })
+
+      window.localStorage.setItem('token', result.token)
+
+      // Exibe o snackbar de sucesso
+      setSnack({
+        show: true,
+        message: 'Autenticação realizada com sucesso!',
+        severity: 'success'
+      })
+
     }
     catch(error) {
       console.error(error)
+
+      // Apaga o token de autenticação no localStorage, caso exista
+      window.localStorage.removeItem('token')  
+
       // Exibe o snackbar de erro
-
-      //Apaga o token de autenticação localSotrage, caso exista
-      widow.localStorage.removeItem('token')
-      
-
       setSnack({
         show: true,
         message: error.message,

@@ -23,7 +23,7 @@ controller.create = async (req, res) => {
     }
 }
 
-controller.retrive = async (req, res) => {
+controller.retrieve = async (req, res) => {
     try{
         const data = await Tag.findAll({
             include:[ 
@@ -39,7 +39,7 @@ controller.retrive = async (req, res) => {
     }
 }
 
-controller.retriveOne = async (req, res) => {
+controller.retrieveOne = async (req, res) => {
     try{
         const data = await Tag.findByPk(req.params.id)
 

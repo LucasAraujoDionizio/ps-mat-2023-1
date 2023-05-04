@@ -39,7 +39,7 @@ controller.retrieve = async(req, res) => {
     }
 }
 
-controller.retriveOne = async (req, res) => {
+controller.retrieveOne = async (req, res) => {
     try{
         const data = await OrderStatus.findByPk(req.params.id)
 

@@ -23,7 +23,7 @@ controller.create = async (req, res) => {
     }
 }
 
-controller.retrive = async (req, res) => {
+controller.retrieve = async (req, res) => {
     try{
         const data = await City.findAll({
             include: {model: Customer, as:'customers'}
@@ -36,7 +36,7 @@ controller.retrive = async (req, res) => {
     }
 }
 
-controller.retriveOne = async (req, res) => {
+controller.retrieveOne = async (req, res) => {
     try{
         const data = await City.findByPk(req.params.id)
 

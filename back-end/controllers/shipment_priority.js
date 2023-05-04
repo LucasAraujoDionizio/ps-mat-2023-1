@@ -23,7 +23,7 @@ controller.create = async (req, res) => {
     }
 }
 
-controller.retrive = async (req, res) => {
+controller.retrieve = async (req, res) => {
     try{
         const data = await ShipmentPriority.findAll()
         // HTTP 200: OK (implicito)
@@ -34,7 +34,7 @@ controller.retrive = async (req, res) => {
     }
 }
 
-controller.retriveOne = async (req, res) => {
+controller.retrieveOne = async (req, res) => {
     try{
         const data = await ShipmentPriority.findByPk(req.params.id)
 

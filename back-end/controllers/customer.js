@@ -1,7 +1,5 @@
 //Importar o model correspodente ao controller
 const {Customer,City,Tag} = require('../models')
-const city = require('../models/city')
-const customer_tag = require('../models/customer_tag')
 
 const controller = {} //Objeto Vazio
 

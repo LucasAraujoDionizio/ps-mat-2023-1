@@ -2,6 +2,10 @@ const jwt = require ('jsonwebtoken')
 
 module.exports = (req,res,next)=>{
 
+    // Gambiarra para não exigir autenticação
+    next()
+    return
+
     const bypassRoutes=[
         { url:'/users/login', method:'POST'}
     ]

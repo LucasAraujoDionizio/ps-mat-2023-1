@@ -114,7 +114,6 @@ export default function PaymentMethodForm() {
       
       <PageTitle title="Cadastrar novo método de pagamento" />
 
-      <div>{notif.severity}</div>
 
       <form onSubmit={handleFormSubmit}>
         <TextField 

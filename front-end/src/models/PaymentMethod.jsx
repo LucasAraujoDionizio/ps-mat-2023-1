@@ -16,5 +16,7 @@ const PaymentMethod = Joi.object({
     .messages({'*': 'A taxa de operação deve ser informada (entre 0 e 100)'})
 
 })
+//Permite campos não validas, como id, createdAT e updatedAT
+.options({allowUnknown:true})
 
 export default PaymentMethod

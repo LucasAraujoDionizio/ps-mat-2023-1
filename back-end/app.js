@@ -44,8 +44,26 @@ app.use('/users', users)
 const channels = require('./routes/channels')
 app.use('/channels', channels)
 
+const paymentMethods = require('./routes/payment_methods')
+app.use('/payment_methods', paymentMethods)
+
+const carriers = require('./routes/carriers')
+app.use('/carriers', carriers)
+
+const shipmentPriorities = require('./routes/shipment_priorities')
+app.use('/shipment_priorities', shipmentPriorities)
+
+const tags = require('./routes/tags')
+app.use('/tags', tags)
+
 const cities = require('./routes/cities')
 app.use('/cities', cities)
+
+const orderStatuses = require('./routes/order_statuses')
+app.use('/order_statuses', orderStatuses)
+
+const orderTags = require('./routes/order_tags')
+app.use('/order_tags', orderTags)
 
 const customerTags = require('./routes/customer_tags')
 app.use('/customer_tags', customerTags)
@@ -53,16 +71,12 @@ app.use('/customer_tags', customerTags)
 const customers = require('./routes/customers')
 app.use('/customers', customers)
 
-const paymentMethods = require('./routes/payment_methods')
-app.use('/payment_methods', paymentMethods)
-
-const tags = require('./routes/tags')
-app.use('/tags', tags)
-
-const suppliers = require('./routes/suppliers')
+const suppliers = require('./routes/suppliers') 
 app.use('/suppliers', suppliers)
 
-const products = require('./routes/products')
+const products = require('./routes/products') 
 app.use('/products', products)
+
+module.exports = app;
 
 module.exports = app;

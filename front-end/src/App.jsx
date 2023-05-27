@@ -6,8 +6,11 @@ import HeaderBar from './components/ui/HeaderBar'
 import Box from '@mui/material/Box'
 import PaymentMethodList from './pages/payment_method/PaymentMethodList'
 import PaymentMethodForm from './pages/payment_method/PaymentMethodForm'
-import ChannelList from './pages/channel/ChannelList'
 import ChannelForm from './pages/channel/ChannelForm'
+import ChannelList from './pages/channel/ChannelList'
+import OrderStatusForm from './pages/order_status/OrderStatusForm'
+import OrderStatusList from './pages/order_status/OrderStatusList'
+
 
 function AuthGuard({children}) {
   // Estaremos autenticados se tivermos um token gravado no localStorage
@@ -47,6 +50,13 @@ function App() {
           } />          
            <Route path="/channel/:id" element={ 
             <AuthGuard> <ChannelForm /> </AuthGuard> 
+          } />
+
+          <Route path="/order_status" element={<AuthGuard> <OrderStatusList/> </AuthGuard>
+          } />
+          <Route path="/order_status/new" element={ <AuthGuard> <OrderStatusForm /> </AuthGuard>
+          } />
+          <Route path="/order_status/:id" element={ <AuthGuard> <OrderStatusForm /> </AuthGuard>
           } />
 
         </Routes>

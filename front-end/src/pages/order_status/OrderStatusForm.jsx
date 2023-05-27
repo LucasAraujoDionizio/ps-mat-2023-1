@@ -8,19 +8,19 @@ import Backdrop from '@mui/material/Backdrop'
 import CircularProgress from '@mui/material/CircularProgress'
 import Notification from '../../components/ui/Notification'
 import { useNavigate, useParams } from 'react-router-dom'
-import Channel from '../../models/Channel'
+import OrderStatus from '../../models/OrderStatus'
 import getValidationMessages from '../../utils/getValidationMessages';
 
-export default function ChannelForm() {
-    const API_PATH = '/channels'
+export default function OrderStatusForm() {
+    const API_PATH = '/order_statuses'
 
     const navigate = useNavigate()
     const params = useParams()
   
     const [state, setState] = React.useState({
-      channel: {
+      orderStatus: {
         description: '',
-        comission_fee: ''
+        sequence: ''
       },
       errors: {},
       showWaiting: false,
@@ -31,16 +31,16 @@ export default function ChannelForm() {
       }
     })
     const {
-      channel,
+      orderStatus,
       errors,
       showWaiting,
       notif
     } = state
   
     function handleFormFieldChange(event) {
-      const channelCopy = {...channel}
-      channelCopy[event.target.name] = event.target.value
-      setState({...state, channel: channelCopy})
+      const orderStatusCopy = {...orderStatus}
+      orderStatusCopy[event.target.name] = event.target.value
+      setState({...state, orderStatus: orderStatusCopy})
     }
   
     function handleFormSubmit(event) {
@@ -62,7 +62,7 @@ export default function ChannelForm() {
         const result = await myfetch.get(`${API_PATH}/${params.id}`)
           setState({
             ...state,
-            channel: result,
+            orderStatus: result,
             showWaiting: false
           })
       }
@@ -85,13 +85,13 @@ export default function ChannelForm() {
       setState({...state, showWaiting: true, errors: {}})
       try {
         //Chama a validação da biblioteca Joi
-        await Channel.validateAsync(channel, {abortEarly: false})
+        await OrderStatus.validateAsync(orderStatus, {abortEarly: false})
 
         //registro já existe: chama put para atualizar
-        if(params.id) await myfetch.put(`${API_PATH}/${params.id}`, channel)
+        if(params.id) await myfetch.put(`${API_PATH}/${params.id}`, orderStatus)
 
         //registro não exist: chama post para criar
-        else await myfetch.post(API_PATH, channel)
+        else await myfetch.post(API_PATH, orderStatus)
        
         // DAR FEEDBACK POSITIVO E VOLTAR PARA A LISTAGEM
         setState({
@@ -151,7 +151,7 @@ export default function ChannelForm() {
           {notif.message}
       </Notification>
         
-        <PageTitle title={params.id ? "Editar canal " : "Cadastrar novo canal de comunicação"} />
+        <PageTitle title={params.id ? "Editar status de pedido: " : "Cadastrar novo status de pedido"} />
 
 
         <form onSubmit={handleFormSubmit}>
@@ -161,23 +161,23 @@ export default function ChannelForm() {
             fullWidth
             required
             name="description"  // Nome do campo na tabela
-            value={channel.description}   // Nome do campo na tabela
+            value={orderStatus.description}   // Nome do campo na tabela
             onChange={handleFormFieldChange}
             error={errors?.description}
             helperText={errors?.description}
           />
   
           <TextField 
-            label="Taxa de comissão" 
+            label="Sequencia" 
             variant="filled"
             type="number"
             fullWidth
             required
-            name="comission_fee"  // Nome do campo na tabela
-            value={channel.comission_fee}   // Nome do campo na tabela
+            name="sequence"  // Nome do campo na tabela
+            value={orderStatus.sequence}   // Nome do campo na tabela
             onChange={handleFormFieldChange}
-            error={errors?.comission_fee}
-            helperText={errors?.comission_fee}
+            error={errors?.sequence}
+            helperText={errors?.sequence}
           />
   
           <Fab 

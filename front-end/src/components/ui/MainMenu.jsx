@@ -47,6 +47,10 @@ export default function MainMenu() {
         
         <Divider />
 
+        <MenuItem onClick={handleClose} component={Link}to="/user">
+          Users
+        </MenuItem>
+
         <MenuItem onClick={handleClose} component={Link} to="/">
           Início
         </MenuItem>
@@ -63,20 +67,16 @@ export default function MainMenu() {
            Prioridades de envio
         </MenuItem>
 
+        <MenuItem onClick={handleClose} component={Link}to="/order_status">
+           Status dos pedido s
+        </MenuItem>
+
         <MenuItem onClick={handleClose} component={Link}to="/channel">
           Canais de comunicação
         </MenuItem>
 
         <MenuItem onClick={handleClose} component={Link}to="/tag">
-          Etiquetas
-        </MenuItem>
-
-        <MenuItem onClick={handleClose} component={Link}to="/order_status">
-           Status do pedido 
-        </MenuItem>
-
-        <MenuItem onClick={handleClose} component={Link}to="/user">
-          Usuários 
+          Etiquetas/tags
         </MenuItem>
 
       </Menu>

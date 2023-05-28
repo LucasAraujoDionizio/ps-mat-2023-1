@@ -21,13 +21,13 @@ const User = Joi.object({
     
     is_admin: Joi.boolean()
         .required()
-        .messages({'*': 'Deve falar se é administrador ou não (Colocar false (Não) ou true (Sim)'}),
+        .messages({'*': 'Deve-se falar se é administrador ou não é (Colocar false (Não) ou true (Sim)'}),
     
     phone:Joi.string()
         .min(2)
         .max(20)
         .required()
-        .messages({'*': 'O telefone deve ser informado (entre 2 e 20 caracteres)'}),
+        .messages({'*': 'O numero de telefone deve ser informado (entre 2 e 20 caracteres)'}),
 
     password:Joi.string()
         .min(2)

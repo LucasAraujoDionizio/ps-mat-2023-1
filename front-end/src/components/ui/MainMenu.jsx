@@ -54,14 +54,31 @@ export default function MainMenu() {
         <MenuItem onClick={handleClose} component={Link} to="/payment_method">
           Métodos de pagamento
         </MenuItem>
-        
-        <MenuItem onClick={handleClose} component={Link} to="/channel">
+
+        <MenuItem onClick={handleClose} component={Link}to="/carrier">
+          Transportadoras
+        </MenuItem>
+
+        <MenuItem onClick={handleClose} component={Link}to="/shipment_priority">
+           Prioridades de envio
+        </MenuItem>
+
+        <MenuItem onClick={handleClose} component={Link}to="/channel">
           Canais de comunicação
         </MenuItem>
 
-        <MenuItem onClick={handleClose} component={Link} to="/order_status">
-            Status de pedido
+        <MenuItem onClick={handleClose} component={Link}to="/tag">
+          Etiquetas
         </MenuItem>
+
+        <MenuItem onClick={handleClose} component={Link}to="/order_status">
+           Status do pedido 
+        </MenuItem>
+
+        <MenuItem onClick={handleClose} component={Link}to="/user">
+          Usuários 
+        </MenuItem>
+
       </Menu>
     </div>
   );

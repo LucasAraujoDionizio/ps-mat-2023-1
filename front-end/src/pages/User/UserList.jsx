@@ -2,26 +2,23 @@ import React from 'react'
 import myfetch from '../../utils/myfetch'
 import PageTitle from '../../components/ui/PageTitle'
 import Paper from '@mui/material/Paper';
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
-import { IconButton } from '@mui/material';
+import IconButton from '@mui/material/IconButton'
 import Backdrop from '@mui/material/Backdrop'
 import CircularProgress from '@mui/material/CircularProgress'
-import ConfirmDialog from '../../components/ui/ComfirmDialog';
+import ConfirmDialog from '../../components/ui/ConfirmDialog'
 import Notification from '../../components/ui/Notification'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import { Link } from 'react-router-dom'
 import AddCircleIcon from '@mui/icons-material/AddCircle'
-
-
-
-export default function ChannelList() {
-  const API_PATH = '/channels'
+export default function UserList() {
+  const API_PATH = '/users'
 
   const [state, setState] = React.useState({
-    channels: [],
+    users: [],
     showWaiting: false,
     showDialog: false,
     deleteId: null,
@@ -32,7 +29,7 @@ export default function ChannelList() {
     }
   })
   const {
-    channels,
+    users,
     showWaiting,
     showDialog,
     deleteId,
@@ -45,7 +42,7 @@ export default function ChannelList() {
       const result = await myfetch.get(API_PATH)
       setState({ 
         ...state, 
-        channels: result, 
+        users: result, 
         showWaiting: false,
         showDialog: false
       })
@@ -67,13 +64,28 @@ export default function ChannelList() {
   const columns = [
     { field: 'id', headerName: 'Cód.', width: 90 },
     {
-      field: 'description',
-      headerName: 'Descrição',
+      field: 'name',
+      headerName: 'Nome',
       width: 150
     },
     {
-      field: 'comission_fee',
-      headerName: 'Taxa de comissão',
+      field: 'email',
+      headerName: 'E-mail',
+      width: 150
+    },
+    {
+      field: 'verified_email',
+      headerName: 'E-mail verificado',
+      width: 150
+    },
+    {
+      field: 'is_admin',
+      headerName: 'Administrador',
+      width: 150
+    },
+    {
+      field: 'phone',
+      headerName: 'Telefone',
       width: 150
     },
     {
@@ -175,14 +187,14 @@ export default function ChannelList() {
       </ConfirmDialog>
 
       <Notification 
-        show={notif.show}
-        severity={notif.severity}
-        onClose={handleNotifClose}
+      show={notif.show} 
+      severity={notif.severity}
+      onClose={handleNotifClose}
       >
         {notif.message}
       </Notification>
 
-      <PageTitle title="Listagem dos canais de comunicação"  />
+      <PageTitle title="Listagem de usuários"  />
 
       <Box sx={{
         display: "flex",
@@ -203,7 +215,7 @@ export default function ChannelList() {
 
       <Paper elevation={4} sx={{ height: 400, width: '100%' }}>
         <DataGrid
-          rows={channels}
+          rows={users}
           columns={columns}
           initialState={{
             pagination: {

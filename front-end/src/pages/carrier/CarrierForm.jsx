@@ -8,19 +8,19 @@ import Backdrop from '@mui/material/Backdrop'
 import CircularProgress from '@mui/material/CircularProgress'
 import Notification from '../../components/ui/Notification'
 import { useNavigate, useParams } from 'react-router-dom'
-import OrderStatus from '../../models/OrderStatus'
+import Carrier from '../../models/Carrier'
 import getValidationMessages from '../../utils/getValidationMessages';
 
-export default function OrderStatusForm() {
-    const API_PATH = '/order_statuses'
+export default function CarrierForm() {
+    const API_PATH = '/carriers'
 
     const navigate = useNavigate()
     const params = useParams()
   
     const [state, setState] = React.useState({
-      orderStatus: {
+      carrier: {
         description: '',
-        sequence: ''
+        commission_fee: ''
       },
       errors: {},
       showWaiting: false,
@@ -31,27 +31,28 @@ export default function OrderStatusForm() {
       }
     })
     const {
-      orderStatus,
+      carrier,
       errors,
       showWaiting,
       notif
     } = state
   
     function handleFormFieldChange(event) {
-      const orderStatusCopy = {...orderStatus}
-      orderStatusCopy[event.target.name] = event.target.value
-      setState({...state, orderStatus: orderStatusCopy})
+      const carrierCopy = {...carrier}
+      carrierCopy[event.target.name] = event.target.value
+      setState({...state, carrier: carrierCopy})
     }
   
     function handleFormSubmit(event) {
-      event.preventDefault()    
+      event.preventDefault()  
   
+
       sendData()
     }
 
-   
+
     React.useEffect(() => {
-      
+  
       if(params.id)fetchData()
     }, [])
   
@@ -61,7 +62,7 @@ export default function OrderStatusForm() {
         const result = await myfetch.get(`${API_PATH}/${params.id}`)
           setState({
             ...state,
-            orderStatus: result,
+            carrier: result,
             showWaiting: false
           })
       }
@@ -84,12 +85,15 @@ export default function OrderStatusForm() {
       setState({...state, showWaiting: true, errors: {}})
       try {
 
-        await OrderStatus.validateAsync(orderStatus, {abortEarly: false})
- 
-        if(params.id) await myfetch.put(`${API_PATH}/${params.id}`, orderStatus)
+        await Carrier.validateAsync(carrier, {abortEarly: false})
 
-        else await myfetch.post(API_PATH, orderStatus)
+
+        if(params.id) await myfetch.put(`${API_PATH}/${params.id}`, carrier)
+
+ 
+        else await myfetch.post(API_PATH, carrier)
        
+      
         setState({
           ...state,
           showWaiting: false,
@@ -97,7 +101,7 @@ export default function OrderStatusForm() {
           notif: {
             show: true,
             severity: 'success',
-            message: 'Novo item salvo com sucesso'
+            message: 'Nova transportadora salva com sucesso'
           }
         })
       }
@@ -105,7 +109,7 @@ export default function OrderStatusForm() {
         const { validationError, errorMessages } = getValidationMessages(error)
 
         console.error(error)
-
+        // DAR FEEDBACK NEGATIVO
         setState({
           ...state,
           showWaiting: false,
@@ -123,7 +127,10 @@ export default function OrderStatusForm() {
       if (reason === 'clickaway') {
         return;
       }
+      //se o item for salvo com sucesso, retorna à página de listagem
       if(notif.severity === 'success') navigate(-1)
+
+
       setState({ ...state, notif: { ...notif, show: false } })
     };
   
@@ -144,34 +151,22 @@ export default function OrderStatusForm() {
           {notif.message}
       </Notification>
         
-        <PageTitle title={params.id ? "Editar status de pedido: " : "Cadastrar novo status de pedido"} />
+        <PageTitle title={params.id ? "Editar transportadora " : "Cadastrar nova transportadora"} />
 
 
         <form onSubmit={handleFormSubmit}>
           <TextField 
-            label="Descrição" 
+            label="Nome" 
             variant="filled"
             fullWidth
             required
-            name="description"  // Nome do campo na tabela
-            value={orderStatus.description}   // Nome do campo na tabela
+            name="name"  // Nome do campo na tabela
+            value={carrier.name}   // Nome do campo na tabela
             onChange={handleFormFieldChange}
-            error={errors?.description}
-            helperText={errors?.description}
+            error={errors?.name}
+            helperText={errors?.name}
           />
   
-          <TextField 
-            label="Sequencia" 
-            variant="filled"
-            type="number"
-            fullWidth
-            required
-            name="sequence"  // Nome do campo na tabela
-            value={orderStatus.sequence}   // Nome do campo na tabela
-            onChange={handleFormFieldChange}
-            error={errors?.sequence}
-            helperText={errors?.sequence}
-          />
   
           <Fab 
             variant="extended" 

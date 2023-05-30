@@ -8,6 +8,13 @@ import { Link } from 'react-router-dom'
 import MainMenu from './MainMenu'
 
 export default function HeaderBar() {
+
+  const [state,setState]=React.useState({
+    dialogOpen:false,
+    isLoggedIn: false
+  })
+  const navigate=useNavigate()
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">

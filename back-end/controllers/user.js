@@ -130,7 +130,15 @@ controller.login = async(req, res) => {
         )
 
         //Retorna o token => HTTP 200: OK (implícito)
-        res.json({ auth: true, token})
+        //res.json({ auth: true, token})
+        res.cookie('AUTH', token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None',
+            path: '/',
+            maxAge:24 * 60 * 60 // 24 hrs
+     })
+      res.json({auth: true, token})
     }
     else{
         //Senha errada -> HTTP 401: Unauthorized

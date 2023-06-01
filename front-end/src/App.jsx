@@ -1,4 +1,5 @@
 import './App.css'
+import React from 'react'
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import Home from './pages/Home'
 import Login from './pages/Login'
@@ -6,18 +7,6 @@ import HeaderBar from './components/ui/HeaderBar'
 import Box from '@mui/material/Box'
 import PaymentMethodList from './pages/payment_method/PaymentMethodList'
 import PaymentMethodForm from './pages/payment_method/PaymentMethodForm'
-import ShipmentPriorityList from './pages/shipment_priority/ShipmentPriorityList'
-import ShipmentPriorityForm from './pages/shipment_priority/ShipmentPriorityForm'
-import CarrierForm from './pages/carrier/CarrierForm'
-import CarrierList from './pages/carrier/CarrierList'
-import ChannelForm from './pages/channel/ChannelForm'
-import ChannelList from './pages/channel/ChannelList'
-import TagForm from './pages/tag/TagForm'
-import TagList from './pages/tag/TagList'
-import OrderStatusForm from './pages/order_status/OrderStatusForm'
-import OrderStatusList from './pages/order_status/OrderStatusList'
-import UserForm from './pages/user/UserForm'
-import UserList from './pages/user/UserList'
 
 function AuthGuard({children}) {
   // Estaremos autenticados se tivermos um token gravado no localStorage
@@ -25,8 +14,15 @@ function AuthGuard({children}) {
   else return <Navigate to="/login" replace />
 }
 
-function App(){
-return(
+function App() {
+
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false)
+
+  function onLoginLogout(loggedIn) {
+    setIsLoggedIn(loggedIn)
+  }
+
+  return (
 
 		<BrowserRouter>
       <HeaderBar/>

@@ -1,50 +1,53 @@
-const jwt = require ('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 
-module.exports = (req,res,next)=>{
+module.exports = (req, res, next) => {
 
-    // Gambiarra para não exigir autenticação
-    //next()
-   // return
+  // Gambiarra para não precisar fazer login
+  // next()
+  // return
 
-    const bypassRoutes=[
-        { url:'/users/login', method:'POST'}
-    ]
+  const bypassRoutes = [
+    { url: '/users/login', method: 'POST' }
+  ]
 
-    for(let route of bypassRoutes){
-        if(route.url===req.url && route.method ===req.method){
-            next()
-            return
-        }
+  for(let route of bypassRoutes) {
+    if(route.url === req.url && route.method === req.method) {
+      next()
+      return
     }
+  }
 
-    //É necessário ter o token parar continuar
-    const bearerHeader = req.headers['authorization']
+  // // É necessário ter o token para continuar 
+  // const bearerHeader = req.headers['authorization']
+  
+  // // O token não foi passado ~> HTTP 403: Forbidden
+  // if(!bearerHeader) return res.status(403).end()
 
-    //O token não foi passado ~> HTTP 403: Forbidden
-    if(!bearerHeader) return res.status(403).end()
+  // // Extrai o token de dentro do cabeçalho "authorization"
+  // const temp = bearerHeader.split(' ')
+  // const token = temp[1]
 
-    //Extrai o token de dentro do cabeçalho "authorization"
-    //const temp = bearerHeader.split(' ')
-    //const token = temp[1]
+  // Verifica se o token foi enviado por meio de cookie
+  const token = req.cookies['AUTH']
+  //console.log({token})
 
-    const token = req.cookies['AUTH']
-    console.log({token})
+  // Se não houver token ~> HTTP 403: Forbidden
+  if(!token) return res.status(403).end()
 
-    if(!token) return res.status(403).end()
+  // Validando o token
+  jwt.verify(token, process.env.TOKEN_SECRET, (error, decoded) => {
 
-    //validando o token
-    jwt.verify(token, process.env.TOKEN_SECRET,(error,decoded)=>{
-        
-        //token inválido ou expirado -> HTTP403 : Forbidden
-        if(error) return res.status(403).end()
+    // Token inválido ou expirado ~> HTTP 403: Forbidden
+    if(error) return res.status(403).end()
 
-        //Se chegarmos até aqui, o token está OK e temos as informações do
-        //usuário logado no parâmetro "decoded". Vamos guardar isso na
-        //request para usar depois
-        req.authUser = decoded
+    // Se chegamos até aqui, o token está OK e temos as informações do
+    // usuário logado no parâmetro "decoded". Vamos guardar isso na
+    // request para usar depois
+    req.authUser = decoded
 
-        //console.log({authUser: req.authUser})
+    //console.log({authUser: req.authUser})
 
-        next()
-    })
+    next()
+  })
+
 }

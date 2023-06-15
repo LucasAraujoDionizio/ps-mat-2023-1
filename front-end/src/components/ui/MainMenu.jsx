@@ -47,10 +47,6 @@ export default function MainMenu() {
         
         <Divider />
 
-        <MenuItem onClick={handleClose} component={Link}to="/user">
-          Users
-        </MenuItem>
-
         <MenuItem onClick={handleClose} component={Link} to="/">
           Início
         </MenuItem>
@@ -58,27 +54,6 @@ export default function MainMenu() {
         <MenuItem onClick={handleClose} component={Link} to="/payment_method">
           Métodos de pagamento
         </MenuItem>
-
-        <MenuItem onClick={handleClose} component={Link}to="/carrier">
-          Transportadoras
-        </MenuItem>
-
-        <MenuItem onClick={handleClose} component={Link}to="/shipment_priority">
-           Prioridades de envio
-        </MenuItem>
-
-        <MenuItem onClick={handleClose} component={Link}to="/order_status">
-           Status dos pedido s
-        </MenuItem>
-
-        <MenuItem onClick={handleClose} component={Link}to="/channel">
-          Canais de comunicação
-        </MenuItem>
-
-        <MenuItem onClick={handleClose} component={Link}to="/tag">
-          Etiquetas/tags
-        </MenuItem>
-
       </Menu>
     </div>
   );
